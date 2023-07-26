@@ -1,120 +1,117 @@
 <section class='container'>
-	<h1>Ironhack Characters API</h1>
+  <h1>Ironhack Characters API</h1>
 
-	{{#if errorMessage}}
-		<span class="error"> 
-			{{errorMessage}}
-		</span>
-	{{/if}}
+  {{#if errorMessage}}
+    <span class='error'>
+      {{errorMessage}}
+    </span>
+  {{/if}}
 
-	<div class='characters-container'>
-		<div class='character-info'>
-			{{! Display the information for 1 character below }}
-			<div class='name'>Character Name</div>
-			<div class='occupation'>Character Occupation</div>
-			<div class='cartoon'>Is a Cartoon?</div>
-			<div class='weapon'>Character Weapon</div>
-		</div>
-	</div>
+  <div class='characters-container'>
+    <div class='character-info'>
+      {{! Display the information for 1 character below }}
+      <div class='name'>Character Name: {{oneCharacter.name}}</div>
+      <div class='occupation'>Character: Occupation{{oneCharacter.occupation}}</div>
+      <div class='cartoon'>Is a Cartoon? {{oneCharacter.cartoon}}</div>
+      <div class='weapon'>Character Weapon: {{oneCharacter.weapon}}</div>
+    </div>
+  </div>
 
-	<section class='operations'>
-		<div class='operation'>
-			<a href='/all' id='fetch-all' class="a-btn">Fetch all</a>
-		</div>
+  <section class='operations'>
+    <div class='operation'>
+      <a href='/all' id='fetch-all' class='a-btn'>Fetch all</a>
+    </div>
 
-		<div class='operation'>
-			<form action='/search'>
-				<label>Search by ID:
-					<input type='text' name='id' />
-				</label>
-				<button id='fetch-one'>Fetch one</button>
-			</form>
-		</div>
+    <div class='operation'>
+      <form action='/search'>
+        <label>Search by ID:
+          <input type='text' name='id' />
+        </label>
+        <button id='fetch-one'>Fetch one</button>
+      </form>
+    </div>
 
-		<div class='operation delete'>
-			<form action='/search/delete' method='POST'>
-				<label>Delete by ID:
-					<input type='text' name='id' />
-				</label>
-				<button id='delete-one'>Delete one</button>
-			</form>
-		</div>
+    <div class='operation delete'>
+      <form action='/search/delete' method='POST'>
+        <label>Delete by ID:
+          <input type='text' name='id' />
+        </label>
+        <button id='delete-one'>Delete one</button>
+      </form>
+    </div>
 
-	</section>
+  </section>
 </section>
 
 <section class='container'>
-	<section class='form-container'>
-		<h2>New Character</h2>
-		<form
-			id='new-character-form'
-			class='character-form'
-			action='/search/new-character'
-			method='POST'
-		>
-			<div class='field'>
-				<label>Name:
-					<input type='text' name='name' />
-				</label>
-			</div>
+  <section class='form-container'>
+    <h2>New Character</h2>
+    <form id='new-character-form' class='character-form' action='/search/new-character' method='POST'>
+      <div class='field'>
+        <label>Name:
+          <input type='text' name='name' />
+        </label>
+      </div>
 
-			<div class='field'>
-				<label>Occupation:
-					<input type='text' name='occupation' />
-				</label>
-			</div>
+      <div class='field'>
+        <label>Occupation:
+          <input type='text' name='occupation' />
+        </label>
+      </div>
 
-			<div class='field'>
-				<label>Weapon:
-					<input type='text' name='weapon' />
-				</label>
-			</div>
+      <div class='field'>
+        <label>Weapon:
+          <input type='text' name='weapon' />
+        </label>
+      </div>
 
-			<div class='field'>
-				<label>Is a Cartoon:
-					<input name='cartoon' type='checkbox' />
-				</label>
-			</div>
+      <div class='field'>
+        <label>Is a Cartoon:
+          <input name='cartoon' type='checkbox' />
+        </label>
+      </div>
 
-			<button id='send-data'>Create</button>
-		</form>
-	</section>
+      <button id='send-data'>Create</button>
+    </form>
+  </section>
 
-	<section class='form-container'>
-		<h2>Edit Character</h2>
-		<form id='edit-character-form' class='character-form' method='POST' action='/search/edit'>
+  <section class='form-container'>
+    <h2>Edit Character</h2>
+    <form id='edit-character-form' class='character-form' method='POST' action='/search/edit'>
 
-			<div class='field'>
-				<label>ID:
-					<input type='text' name='id' />
-				</label>
-			</div>
+      <div class='field'>
+        <label>ID:
+          <input type='text' name='id' />
+        </label>
+      </div>
 
-			<div class='field'>
-				<label>Name:
-					<input type='text' name='name' />
-				</label>
-			</div>
+      <div class='field'>
+        <label>Name:
+          <input type='text' name='name' />
+        </label>
+      </div>
 
-			<div class='field'>
-				<label>Occupation:
-					<input type='text' name='occupation' />
-				</label>
-			</div>
+      <div class='field'>
+        <label>Occupation:
+          <input type='text' name='occupation' />
+        </label>
+      </div>
 
-			<div class='field'>
-				<label>Weapon:
-					<input type='text' name='weapon' />
-				</label>
-			</div>
-			<div class='field'>
-				<label>Is a Cartoon:
-					<input name='cartoon' type='checkbox' />
-				</label>
-			</div>
+      <div class='field'>
+        <label>Weapon:
+          <input type='text' name='weapon' />
+        </label>
+      </div>
+      <div class='field'>
+        <label>Is a Cartoon:
+          <input name='cartoon' type='checkbox' />
+        </label>
+      </div>
 
-			<button id='send-data'>Update</button>
-		</form>
-	</section>
-	{{! Show all the characters here if the "fetch all" button is pressedA }}
+      <button id='send-data'>Update</button>
+    </form>
+  </section>
+  {{#each allCharacters}}
+    <h2>{{name}}</h2>
+  {{/each}}
 </section>
